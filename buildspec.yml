@@ -1,10 +1,17 @@
-version: 2.0
-os: linux
-files:
-  - source: /
-    destination: /var/www/html/
-hooks:
-  BeforeInstall:
-    - location: stop_server
-      timeout: 30
-      runas: root
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      php: 7.4
+  pre_build:
+    commands:
+      - echo "Starting build"
+  build:
+    commands:
+      - git clone https://github.com/jmuachifi/simple-app.git
+      - cd simple-app
+      - cp * /var/www/html/
+  post_build:
+    commands:
+      - echo "Build completed"
