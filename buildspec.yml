@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nginx: latest
+    commands:
+      - echo "Installing NGINX"
+      - yum -y update
+      - amazon-linux-extras install nginx1.12
+      - service nginx start
+  build:
+    commands:
+      - echo "Building the app"
+      - cp aws-lab.html /usr/share/nginx/html/
+  post_build:
+    commands:
+      - echo "Deploying the app"
+      - service nginx restart
