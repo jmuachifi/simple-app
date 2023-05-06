@@ -3,26 +3,17 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      php: 7.4
-  pre_build:
-    commands:
-      - echo "Starting build"
+      ubuntu: 22.04
   build:
     commands:
-      - git clone https://github.com/jmuachifi/simple-app.git
+      - sudo rm -rf /var/www/html/*
+      - sudo git clone https://github.com/jmuachifi/simple-app.git
       - cd simple-app
-      - cp * /var/www/html/
+      - sudo cp aws-lab.html /var/www/html/
+      - sudo chown www-data:www-data /var/www/html/aws-lab.html
   post_build:
     commands:
-      - echo "Build completed"
-hooks:
-  BeforeInstall:
-    - location: scripts/start_server
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: root
+      - sudo service apache2 restart
+
       
      
