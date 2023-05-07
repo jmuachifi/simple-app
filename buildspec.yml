@@ -1,18 +1,17 @@
-version: 0.2
-
-phases:
-  install:
-    runtime-versions:
-      ubuntu: 22.04
-  build:
-    commands:
-      - sudo rm -rf /var/www/html/*
-      - sudo git clone https://github.com/jmuachifi/simple-app.git
-      - cd simple-app
-      - sudo cp index.html /var/www/html/
-  post_build:
-    commands:
-      - sudo service apache2 restart
+version: 0.0
+os: linux
+files:
+  - source: /index.html
+    destination: /var/www/html/
+hooks:
+  BeforeInstall:
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 300
+      runas: root
 
       
      
