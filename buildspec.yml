@@ -9,8 +9,7 @@ phases:
       - sudo rm -rf /var/www/html/*
       - sudo git clone https://github.com/jmuachifi/simple-app.git
       - cd simple-app
-      - sudo cp aws-lab.html /var/www/html/
-      - sudo chown www-data:www-data /var/www/html/aws-lab.html
+      - sudo cp index.html /var/www/html/
   post_build:
     commands:
       - sudo service apache2 restart
